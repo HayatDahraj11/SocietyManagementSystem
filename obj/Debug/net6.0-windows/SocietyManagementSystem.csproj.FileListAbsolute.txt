@@ -34,3 +34,5 @@ C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.genruntimeconfig.cache
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\ref\SocietyManagementSystem.dll
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.RegistrationForm.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.Dashboard.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.SocietyDetails.resources

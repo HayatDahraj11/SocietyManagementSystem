@@ -27,8 +27,20 @@ namespace SocietyManagementSystem
                         int result = Convert.ToInt32(cmd.ExecuteScalar());
                         if (result == 1)
                         {
-                            MessageBox.Show("Login successful.");
-                            // Proceed to the main application
+                            // First Get the user id
+                            query = "SELECT user_id FROM users WHERE username=@username;";
+                            cmd.CommandText = query;
+                            int userId = Convert.ToInt32(cmd.ExecuteScalar());
+                            // Start the user session
+                            SessionManager.GetInstance().StartUserSession(userId);
+
+                            // Close the login form and open the dashboard
+                            // Clear the password field
+                            passwordTextBox.Text = "";
+                            this.Hide();
+                            var dashboard = new Dashboard();
+                            dashboard.Show();
+                            dashboard.FormClosed += (s, args) => this.Show();
                         }
                         else
                         {
@@ -54,6 +66,11 @@ namespace SocietyManagementSystem
             {
                 Show();
             };
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

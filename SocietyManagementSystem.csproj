@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dashboard.cs" />
+    <Compile Update="SocietyDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>

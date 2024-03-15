@@ -30,7 +30,7 @@ namespace SocietyManagementSystem
                 try
                 {
                     connection.Open();
-                    string query = "INSERT INTO users (name, username, email, password, user_type, join_date) VALUES (@name, @username, @email, @password, @userType, @joinDate)";
+                    string query = "INSERT INTO users (full_name, username, email, password, user_type, join_date) VALUES (@name, @username, @email, @password, @userType, @joinDate)";
                     using (var command = new MySqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@name", name);
@@ -54,6 +54,11 @@ namespace SocietyManagementSystem
         }
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }

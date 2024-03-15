@@ -97,6 +97,7 @@ namespace SocietyManagementSystem
             nameTextBox.Name = "nameTextBox";
             nameTextBox.Size = new Size(300, 23);
             nameTextBox.TabIndex = 1;
+            nameTextBox.TextChanged += nameTextBox_TextChanged;
             // 
             // usernameTextBox
             // 

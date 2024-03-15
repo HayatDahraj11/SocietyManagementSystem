@@ -2,15 +2,14 @@ DROP DATABASE IF EXISTS sms;
 CREATE DATABASE sms;
 USE sms;
 
-
 -- Users table (includes students, mentors, etc.)
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     `password` VARCHAR(255) NOT NULL, -- Ensure password is hashed
-    user_type ENUM('student', 'mentor', 'other') NOT NULL,
+    user_type ENUM('student', 'mentor') NOT NULL,
     join_date DATE NOT NULL
 );
 
@@ -61,7 +60,7 @@ CREATE TABLE event_registrations (
 
 -- Dummy Data Insertion
 -- Insert dummy users (students, mentors)
-INSERT INTO users (name, username, email, password, user_type, join_date) VALUES
+INSERT INTO users (full_name, username, email, password, user_type, join_date) VALUES
 ('John Doe', 'jony', 'john.doe@example.com', '1234', 'student', '2023-01-01'),
 ('Jane Smith', 'jane', 'jane.smith@example.com', '4321', 'mentor', '2023-01-02'),
 ('Robert Brown', 'roby', 'robert.brown@example.com', '1234', 'student', '2023-01-03'),
