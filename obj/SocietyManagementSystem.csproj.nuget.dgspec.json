@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {}
+    "C:\\Users\\hayat\\Source\\Repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {
+    "C:\\Users\\hayat\\Source\\Repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\hayat\\Source\\Repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
         "projectName": "SocietyManagementSystem",
-        "projectPath": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
-        "packagesPath": "C:\\Users\\shahz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\obj\\",
+        "projectPath": "C:\\Users\\hayat\\Source\\Repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\hayat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hayat\\Source\\Repos\\HayatDahraj11\\SocietyManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\shahz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hayat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +43,10 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[8.3.0, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.3.5, )"
             }
           },
           "imports": [
@@ -64,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

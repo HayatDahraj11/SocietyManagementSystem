@@ -5,7 +5,7 @@ namespace SocietyManagementSystem
     public partial class SocietyDetails : Form
     {
         private int societyId;
-        string connectionString = "server=localhost;database=sms;uid=root;pwd=$Zaib524719;";
+        string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
 
         public SocietyDetails(int societyId)
         {
@@ -56,6 +56,11 @@ namespace SocietyManagementSystem
                     MessageBox.Show($"Failed to load society details: {ex.Message}");
                 }
             }
+        }
+
+        private void SocietyDetails_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

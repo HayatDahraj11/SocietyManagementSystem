@@ -28,7 +28,7 @@ public class SessionManager
         UserId = userId;
 
         // Get Details of user
-        string connectionString = "server=localhost;database=sms;uid=root;pwd=$Zaib524719;";
+        string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
