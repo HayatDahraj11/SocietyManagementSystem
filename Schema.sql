@@ -20,7 +20,7 @@ CREATE TABLE societies (
     `description` TEXT,
     creation_date DATE NOT NULL,
     founder_id INT,
-    mentor_id INT, -- Mentor who approves the society
+    mentor_id INT DEFAULT 1, -- Mentor who approves the society
     `status` ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     FOREIGN KEY (founder_id) REFERENCES users(user_id),
     FOREIGN KEY (mentor_id) REFERENCES users(user_id)
@@ -57,6 +57,20 @@ CREATE TABLE event_registrations (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
+select * from society_members;
+-- Trigger to update society members
+DELIMITER $$
+
+CREATE TRIGGER after_society_creation
+AFTER INSERT ON societies
+FOR EACH ROW
+BEGIN
+  INSERT INTO society_members (user_id, society_id, role, join_date) 
+  VALUES (NEW.founder_id, NEW.society_id, 'president', NEW.creation_date);
+END$$
+
+DELIMITER ;
+
 
 -- Dummy Data Insertion
 -- Insert dummy users (students, mentors)
@@ -73,7 +87,6 @@ INSERT INTO societies (name, description, creation_date, founder_id, mentor_id, 
 
 -- Insert society members (linking users to societies with roles)
 INSERT INTO society_members (user_id, society_id, role, join_date) VALUES
-(1, 1, 'president', '2023-01-07'),
 (3, 1, 'member', '2023-01-08'),
 (4, 1, 'ec_member', '2023-01-09');
 

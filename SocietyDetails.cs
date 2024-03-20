@@ -43,10 +43,14 @@ namespace SocietyManagementSystem
                     cmd.Parameters.AddWithValue("@societyId", societyId);
                     using (var reader = cmd.ExecuteReader())
                     {
+                        lvMembers.Items.Clear(); // Clear existing items before adding new ones
+
                         while (reader.Read())
                         {
-                            ListViewItem item = new ListViewItem(reader["full_name"].ToString());
-                            item.SubItems.Add(reader["role"].ToString());
+                            ListViewItem item = new ListViewItem(new[] {
+                                reader["full_name"].ToString(),
+                                reader["role"].ToString()
+                            });
                             lvMembers.Items.Add(item);
                         }
                     }
@@ -58,7 +62,7 @@ namespace SocietyManagementSystem
             }
         }
 
-        private void SocietyDetails_Load(object sender, EventArgs e)
+        private void lvMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

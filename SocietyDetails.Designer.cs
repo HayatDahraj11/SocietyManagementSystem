@@ -14,7 +14,7 @@ namespace SocietyManagementSystem
             }
             base.Dispose(disposing);
         }
-        
+
         private Label lblSocietyName;
         private Label lblDescription;
         private Label lblStatus;
@@ -24,91 +24,93 @@ namespace SocietyManagementSystem
         private ListView lvMembers;
         private void InitializeComponent()
         {
-            this.lblSocietyName = new System.Windows.Forms.Label();
-            this.lblDescription = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.lblCreationDate = new System.Windows.Forms.Label();
-            this.lblFounder = new System.Windows.Forms.Label();
-            this.lblMentor = new System.Windows.Forms.Label();
-            this.lvMembers = new System.Windows.Forms.ListView();
-            this.SuspendLayout();
+            lblSocietyName = new Label();
+            lblDescription = new Label();
+            lblStatus = new Label();
+            lblCreationDate = new Label();
+            lblFounder = new Label();
+            lblMentor = new Label();
+            lvMembers = new ListView();
+            SuspendLayout();
             // 
             // lblSocietyName
             // 
-            this.lblSocietyName.AutoSize = true;
-            this.lblSocietyName.Location = new System.Drawing.Point(20, 20);
-            this.lblSocietyName.Name = "lblSocietyName";
-            this.lblSocietyName.Size = new System.Drawing.Size(0, 20);
-            this.lblSocietyName.TabIndex = 0;
+            lblSocietyName.AutoSize = true;
+            lblSocietyName.Location = new Point(18, 15);
+            lblSocietyName.Name = "lblSocietyName";
+            lblSocietyName.Size = new Size(0, 15);
+            lblSocietyName.TabIndex = 0;
             // 
             // lblDescription
             // 
-            this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(20, 50);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(0, 20);
-            this.lblDescription.TabIndex = 1;
+            lblDescription.AutoSize = true;
+            lblDescription.Location = new Point(18, 38);
+            lblDescription.Name = "lblDescription";
+            lblDescription.Size = new Size(0, 15);
+            lblDescription.TabIndex = 1;
             // 
             // lblStatus
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(20, 80);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 20);
-            this.lblStatus.TabIndex = 2;
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(18, 60);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(0, 15);
+            lblStatus.TabIndex = 2;
             // 
             // lblCreationDate
             // 
-            this.lblCreationDate.AutoSize = true;
-            this.lblCreationDate.Location = new System.Drawing.Point(20, 110);
-            this.lblCreationDate.Name = "lblCreationDate";
-            this.lblCreationDate.Size = new System.Drawing.Size(0, 20);
-            this.lblCreationDate.TabIndex = 3;
+            lblCreationDate.AutoSize = true;
+            lblCreationDate.Location = new Point(18, 82);
+            lblCreationDate.Name = "lblCreationDate";
+            lblCreationDate.Size = new Size(0, 15);
+            lblCreationDate.TabIndex = 3;
             // 
             // lblFounder
             // 
-            this.lblFounder.AutoSize = true;
-            this.lblFounder.Location = new System.Drawing.Point(20, 140);
-            this.lblFounder.Name = "lblFounder";
-            this.lblFounder.Size = new System.Drawing.Size(0, 20);
-            this.lblFounder.TabIndex = 4;
+            lblFounder.AutoSize = true;
+            lblFounder.Location = new Point(18, 105);
+            lblFounder.Name = "lblFounder";
+            lblFounder.Size = new Size(0, 15);
+            lblFounder.TabIndex = 4;
             // 
             // lblMentor
             // 
-            this.lblMentor.AutoSize = true;
-            this.lblMentor.Location = new System.Drawing.Point(20, 170);
-            this.lblMentor.Name = "lblMentor";
-            this.lblMentor.Size = new System.Drawing.Size(0, 20);
-            this.lblMentor.TabIndex = 5;
+            lblMentor.AutoSize = true;
+            lblMentor.Location = new Point(18, 128);
+            lblMentor.Name = "lblMentor";
+            lblMentor.Size = new Size(0, 15);
+            lblMentor.TabIndex = 5;
             // 
             // lvMembers
             // 
-            this.lvMembers.Location = new System.Drawing.Point(20, 200);
-            this.lvMembers.Name = "lvMembers";
-            this.lvMembers.Size = new System.Drawing.Size(760, 200);
-            this.lvMembers.TabIndex = 6;
-            this.lvMembers.UseCompatibleStateImageBehavior = false;
-            this.lvMembers.View = System.Windows.Forms.View.Details;
+            lvMembers.Location = new Point(18, 150);
+            lvMembers.Margin = new Padding(3, 2, 3, 2);
+            lvMembers.Name = "lvMembers";
+            lvMembers.Size = new Size(666, 151);
+            lvMembers.TabIndex = 6;
+            lvMembers.UseCompatibleStateImageBehavior = false;
+            lvMembers.View = View.Details;
+            lvMembers.Columns.Add("Member Name", -2, HorizontalAlignment.Left);
+            lvMembers.Columns.Add("Role", -2, HorizontalAlignment.Left);
+            lvMembers.SelectedIndexChanged += lvMembers_SelectedIndexChanged;
             // 
             // SocietyDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
-            this.Controls.Add(this.lblSocietyName);
-            this.Controls.Add(this.lblDescription);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.lblCreationDate);
-            this.Controls.Add(this.lblFounder);
-            this.Controls.Add(this.lblMentor);
-            this.Controls.Add(this.lvMembers);
-            this.Name = "SocietyDetails";
-            this.Text = "Society Details";
-            this.Load += new System.EventHandler(this.SocietyDetails_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(700, 450);
+            Controls.Add(lblSocietyName);
+            Controls.Add(lblDescription);
+            Controls.Add(lblStatus);
+            Controls.Add(lblCreationDate);
+            Controls.Add(lblFounder);
+            Controls.Add(lblMentor);
+            Controls.Add(lvMembers);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "SocietyDetails";
+            Text = "Society Details";
+            ResumeLayout(false);
+            PerformLayout();
         }
-
     }
 }

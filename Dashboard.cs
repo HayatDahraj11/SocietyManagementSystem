@@ -15,6 +15,13 @@ namespace SocietyManagementSystem
             this.logoutToolStripMenuItem.Click += LogoutToolStripMenuItem_Click;
         }
 
+        public void RefreshSocieties()
+        {
+            this.societiesPanel.Controls.Clear();
+            LoadSocieties();
+        }
+
+
         private void LoadSocieties()
         {
             string connectionString = GlobalConfig.ConnectionString;
@@ -109,6 +116,13 @@ namespace SocietyManagementSystem
         private void societiesPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void registerSocietyToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            // Implementation for opening the RegisterSociety form
+            RegisterSociety registerSociety = new RegisterSociety();
+            registerSociety.Show();
         }
 
 

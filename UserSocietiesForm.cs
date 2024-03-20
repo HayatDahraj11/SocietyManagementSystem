@@ -4,10 +4,8 @@ namespace SocietyManagementSystem
 {
     public partial class UserSocietiesForm : Form
     {
-        private int _currentUserId; // This should be set when the form is initialized.
+        private int _currentUserId;
 
-        // Modify the constructor to accept the user ID.
-        // private int _currentUserId;
 
         public UserSocietiesForm(int userId)
         {
@@ -18,8 +16,8 @@ namespace SocietyManagementSystem
             lvSocieties.View = View.Details;
 
             // Add columns to lvSocieties
-            lvSocieties.Columns.Add("Society Name", 150); // Adjust the width as needed
-            lvSocieties.Columns.Add("Role", 100); // Adjust the width as needed
+            lvSocieties.Columns.Add("Society Name", 150);
+            lvSocieties.Columns.Add("Role", 100);
 
             this.Load += new System.EventHandler(this.UserSocietiesForm_Load);
         }
@@ -33,6 +31,9 @@ namespace SocietyManagementSystem
         // Populating the ListView with the societies that the user has joined.
         private void LoadUserSocieties()
         {
+            // Clear the ListView
+            lvSocieties.Items.Clear();
+
             string connectionString = GlobalConfig.ConnectionString;
             using (var connection = new MySqlConnection(connectionString))
             {
