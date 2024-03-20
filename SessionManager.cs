@@ -1,4 +1,5 @@
 using MySql.Data.MySqlClient;
+using SocietyManagementSystem;
 
 public class SessionManager
 {
@@ -28,7 +29,7 @@ public class SessionManager
         UserId = userId;
 
         // Get Details of user
-        string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+        string connectionString = GlobalConfig.ConnectionString;
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();

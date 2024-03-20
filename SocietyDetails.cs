@@ -5,7 +5,7 @@ namespace SocietyManagementSystem
     public partial class SocietyDetails : Form
     {
         private int societyId;
-        string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+        string connectionString = GlobalConfig.ConnectionString;
 
         public SocietyDetails(int societyId)
         {

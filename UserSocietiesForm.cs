@@ -1,13 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SocietyManagementSystem
 {
@@ -42,7 +33,7 @@ namespace SocietyManagementSystem
         // Populating the ListView with the societies that the user has joined.
         private void LoadUserSocieties()
         {
-            string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+            string connectionString = GlobalConfig.ConnectionString;
             using (var connection = new MySqlConnection(connectionString))
             {
                 try

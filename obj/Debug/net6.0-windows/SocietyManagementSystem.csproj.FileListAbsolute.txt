@@ -77,3 +77,6 @@ C:\Users\hayat\Source\Repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\hayat\Source\Repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.genruntimeconfig.cache
 C:\Users\hayat\Source\Repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\ref\SocietyManagementSystem.dll
 C:\Users\hayat\Source\Repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.UserSocietiesForm.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\bin\Debug\net6.0-windows\MySqlConnector.dll
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.UserSocietiesForm.resources

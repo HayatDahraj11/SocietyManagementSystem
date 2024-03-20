@@ -24,7 +24,7 @@ namespace SocietyManagementSystem
                 return;
             }
 
-            string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+            string connectionString = GlobalConfig.ConnectionString;
             using (var connection = new MySqlConnection(connectionString))
             {
                 try

@@ -1,7 +1,4 @@
 using MySql.Data.MySqlClient;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace SocietyManagementSystem
 {
@@ -20,7 +17,7 @@ namespace SocietyManagementSystem
 
         private void LoadSocieties()
         {
-            string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+            string connectionString = GlobalConfig.ConnectionString;
             int yOffset = 0;
             const int spacing = 10;
 

@@ -13,7 +13,7 @@ namespace SocietyManagementSystem
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string connectionString = "server=localhost;database=sms;uid=root;pwd=hayat;";
+            string connectionString = GlobalConfig.ConnectionString;
             using (var connection = new MySqlConnection(connectionString))
             {
                 try
