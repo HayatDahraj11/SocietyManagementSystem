@@ -57,6 +57,7 @@ CREATE TABLE event_registrations (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
+select * from users;
 select * from society_members;
 -- Trigger to update society members
 DELIMITER $$
@@ -71,7 +72,7 @@ END$$
 
 DELIMITER ;
 
-
+SELECT u.full_name, sm.role FROM society_members sm JOIN users u ON sm.user_id = u.user_id WHERE sm.society_id = 2
 -- Dummy Data Insertion
 -- Insert dummy users (students, mentors)
 INSERT INTO users (full_name, username, email, password, user_type, join_date) VALUES

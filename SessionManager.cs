@@ -61,6 +61,15 @@ public class SessionManager
         UserType = null;
     }
 
+    // Reload Session in case of updates in user details
+    public void ReloadSession()
+    {
+        if (UserId != 0)
+        {
+            StartUserSession(UserId);
+        }
+    }
+
     // Check if the user is logged in
     public bool IsUserLoggedIn()
     {

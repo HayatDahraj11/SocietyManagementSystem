@@ -15,7 +15,6 @@ namespace SocietyManagementSystem
         {
             menuStrip1 = new MenuStrip();
             profileToolStripMenuItem = new ToolStripMenuItem();
-            mToolStripMenuItem = new ToolStripMenuItem();
             yourSocietiesToolStripMenuItem = new ToolStripMenuItem();
             registerSocietyToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
@@ -36,17 +35,10 @@ namespace SocietyManagementSystem
             // 
             // profileToolStripMenuItem
             // 
-            profileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mToolStripMenuItem });
             profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             profileToolStripMenuItem.Size = new Size(53, 20);
             profileToolStripMenuItem.Text = "Profile";
             profileToolStripMenuItem.Click += profileToolStripMenuItem_Click_1;
-            // 
-            // mToolStripMenuItem
-            // 
-            mToolStripMenuItem.Name = "mToolStripMenuItem";
-            mToolStripMenuItem.Size = new Size(85, 22);
-            mToolStripMenuItem.Text = "m";
             // 
             // yourSocietiesToolStripMenuItem
             // 
@@ -93,7 +85,5 @@ namespace SocietyManagementSystem
             ResumeLayout(false);
             PerformLayout();
         }
-
-        private ToolStripMenuItem mToolStripMenuItem;
     }
 }

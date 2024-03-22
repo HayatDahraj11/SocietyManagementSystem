@@ -84,6 +84,8 @@ namespace SocietyManagementSystem
         private void ProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Open profile page logic here
+            Profile profile = new Profile();
+            profile.Show();
         }
 
         // This is the corrected method for opening the User Societies form
@@ -125,7 +127,5 @@ namespace SocietyManagementSystem
             registerSociety.Show();
         }
 
-
-        // Removed unused event handlers to avoid confusion
     }
 }
