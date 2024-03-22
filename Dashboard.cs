@@ -33,7 +33,7 @@ namespace SocietyManagementSystem
                 try
                 {
                     connection.Open();
-                    string query = "SELECT society_id, name, description FROM societies";
+                    string query = "SELECT society_id, name, description, status FROM societies";
                     using (var command = new MySqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
@@ -43,6 +43,12 @@ namespace SocietyManagementSystem
                                 string societyId = reader["society_id"].ToString();
                                 string name = reader["name"].ToString();
                                 string description = reader["description"].ToString();
+                                string status = reader["status"].ToString();
+
+                                if (status == "pending")
+                                {
+                                    continue;
+                                }
 
                                 Label nameLabel = new Label
                                 {
