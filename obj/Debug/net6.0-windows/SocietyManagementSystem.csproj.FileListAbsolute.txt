@@ -27,7 +27,6 @@ C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.AssemblyInfoInputs.cache
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.AssemblyInfo.cs
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.csproj.CoreCompileInputs.cache
-C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.csproj.CopyComplete
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.dll
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\refint\SocietyManagementSystem.dll
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.pdb
@@ -83,3 +82,6 @@ C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.RegisterSociety.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.Profile.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ChangePassword.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.sourcelink.json
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyM.F1FA37E7.Up2Date
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ManageSocieties.resources

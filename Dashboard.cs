@@ -4,15 +4,39 @@ namespace SocietyManagementSystem
 {
     public partial class Dashboard : Form
     {
-        public Dashboard()
+        private static Dashboard instance;
+
+        public static Dashboard GetInstance()
+        {
+            // If instance is null, or if the instance has been disposed, create a new instance
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new Dashboard();
+            }
+            return instance;
+        }
+
+        private Dashboard()
         {
             InitializeComponent();
             LoadSocieties();
-            this.profileToolStripMenuItem.Click += ProfileToolStripMenuItem_Click;
-            // Updated to correct event handler name
-            this.yourSocietiesToolStripMenuItem.Click += YourSocietiesToolStripMenuItem_Click_1;
-            this.registerSocietyToolStripMenuItem.Click += RegisterSocietyToolStripMenuItem_Click;
-            this.logoutToolStripMenuItem.Click += LogoutToolStripMenuItem_Click;
+
+            // Check user's role and modify UI accordingly
+            string userRole = SessionManager.GetInstance().GetUserType();
+            if (userRole == "mentor")
+            {
+                this.registerSocietyToolStripMenuItem.Visible = false;
+                this.yourSocietiesToolStripMenuItem.Visible = false;
+                this.manageSocietiesToolStripMenuItem.Visible = true;
+                this.manageEventsToolStripMenuItem.Visible = true;
+            }
+            else if (userRole == "student")
+            {
+                this.registerSocietyToolStripMenuItem.Visible = true;
+                this.yourSocietiesToolStripMenuItem.Visible = true;
+                this.manageSocietiesToolStripMenuItem.Visible = false;
+                this.manageEventsToolStripMenuItem.Visible = false;
+            }
         }
 
         public void RefreshSocieties()
@@ -102,29 +126,15 @@ namespace SocietyManagementSystem
             userSocietiesForm.Show();
         }
 
-        private void RegisterSocietyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Open register society form logic here
-        }
+
 
         private void LogoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SessionManager.GetInstance().EndUserSession();
             this.Close();
         }
-        private void profileToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            // Implementation for what happens when the profile menu item is clicked
-        }
-        private void yourSocietiesToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            // Implementation for opening the UserSocietiesForm
-        }
 
-        private void societiesPanel_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
 
         private void registerSocietyToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -133,5 +143,21 @@ namespace SocietyManagementSystem
             registerSociety.Show();
         }
 
+
+
+        private void ManageEventsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ManageSocietiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open Manage Societies form
+            ManageSocieties manageSocietiesForm = new ManageSocieties();
+            manageSocietiesForm.Show();
+
+        }
     }
+
+
 }

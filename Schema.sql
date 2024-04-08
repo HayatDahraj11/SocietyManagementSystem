@@ -13,6 +13,7 @@ CREATE TABLE users (
     join_date DATE NOT NULL
 );
 
+
 -- Societies table (includes a status for approval)
 CREATE TABLE societies (
     society_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,6 +33,7 @@ CREATE TABLE society_members (
     user_id INT NOT NULL,
     society_id INT NOT NULL,
     role ENUM('president', 'ec_member', 'member') NOT NULL,
+    `status` ENUM('pending', 'approved', 'rejected') DEFAULT NULL,
     join_date DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (society_id) REFERENCES societies(society_id)
@@ -72,7 +74,6 @@ END$$
 
 DELIMITER ;
 
-SELECT u.full_name, sm.role FROM society_members sm JOIN users u ON sm.user_id = u.user_id WHERE sm.society_id = 2
 -- Dummy Data Insertion
 -- Insert dummy users (students, mentors)
 INSERT INTO users (full_name, username, email, password, user_type, join_date) VALUES

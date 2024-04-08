@@ -38,9 +38,24 @@ namespace SocietyManagementSystem
                             // Clear the password field
                             passwordTextBox.Text = "";
                             this.Hide();
-                            var dashboard = new Dashboard();
-                            dashboard.Show();
-                            dashboard.FormClosed += (s, args) => this.Show();
+                            // Open the dashboard if it is not already open
+                            // else bring it to the front
+                            if (Dashboard.GetInstance().Visible == false)
+                            {
+                                Dashboard.GetInstance().Show();
+                            }
+                            else
+                            {
+                                Dashboard.GetInstance().BringToFront();
+                            }
+
+                            // If Dashboard Closes, show the login form again
+                            Dashboard.GetInstance().FormClosed += (s, args) =>
+                            {
+                                this.Show();
+                            };
+
+
                         }
                         else
                         {

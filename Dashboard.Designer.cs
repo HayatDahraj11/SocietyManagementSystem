@@ -7,6 +7,8 @@ namespace SocietyManagementSystem
         private MenuStrip menuStrip1;
         private ToolStripMenuItem profileToolStripMenuItem;
         private ToolStripMenuItem yourSocietiesToolStripMenuItem;
+        private ToolStripMenuItem manageEventsToolStripMenuItem;
+        private ToolStripMenuItem manageSocietiesToolStripMenuItem;
         private ToolStripMenuItem registerSocietyToolStripMenuItem;
         private ToolStripMenuItem logoutToolStripMenuItem;
         private Panel societiesPanel;
@@ -17,6 +19,8 @@ namespace SocietyManagementSystem
             profileToolStripMenuItem = new ToolStripMenuItem();
             yourSocietiesToolStripMenuItem = new ToolStripMenuItem();
             registerSocietyToolStripMenuItem = new ToolStripMenuItem();
+            manageSocietiesToolStripMenuItem = new ToolStripMenuItem();
+            manageEventsToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
             societiesPanel = new Panel();
             menuStrip1.SuspendLayout();
@@ -25,7 +29,7 @@ namespace SocietyManagementSystem
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, logoutToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, manageSocietiesToolStripMenuItem, manageEventsToolStripMenuItem, logoutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
@@ -38,14 +42,28 @@ namespace SocietyManagementSystem
             profileToolStripMenuItem.Name = "profileToolStripMenuItem";
             profileToolStripMenuItem.Size = new Size(53, 20);
             profileToolStripMenuItem.Text = "Profile";
-            profileToolStripMenuItem.Click += profileToolStripMenuItem_Click_1;
+            profileToolStripMenuItem.Click += ProfileToolStripMenuItem_Click;
+            // 
+            // manageSocietiesToolStripMenuItem
+            // 
+            manageSocietiesToolStripMenuItem.Name = "manageSocietiesToolStripMenuItem";
+            manageSocietiesToolStripMenuItem.Size = new Size(92, 20);
+            manageSocietiesToolStripMenuItem.Text = "Manage Societies";
+            manageSocietiesToolStripMenuItem.Click += ManageSocietiesToolStripMenuItem_Click;
+            // 
+            // manageEventsToolStripMenuItem
+            // 
+            manageEventsToolStripMenuItem.Name = "manageEventsToolStripMenuItem";
+            manageEventsToolStripMenuItem.Size = new Size(102, 20);
+            manageEventsToolStripMenuItem.Text = "Manage Events";
+            manageEventsToolStripMenuItem.Click += ManageEventsToolStripMenuItem_Click;
             // 
             // yourSocietiesToolStripMenuItem
             // 
             yourSocietiesToolStripMenuItem.Name = "yourSocietiesToolStripMenuItem";
             yourSocietiesToolStripMenuItem.Size = new Size(92, 20);
             yourSocietiesToolStripMenuItem.Text = "Your Societies";
-            yourSocietiesToolStripMenuItem.Click += yourSocietiesToolStripMenuItem_Click_1;
+            yourSocietiesToolStripMenuItem.Click += YourSocietiesToolStripMenuItem_Click_1;
             // 
             // registerSocietyToolStripMenuItem
             // 
@@ -53,12 +71,14 @@ namespace SocietyManagementSystem
             registerSocietyToolStripMenuItem.Size = new Size(102, 20);
             registerSocietyToolStripMenuItem.Text = "Register Society";
             registerSocietyToolStripMenuItem.Click += registerSocietyToolStripMenuItem_Click_1;
+            
             // 
             // logoutToolStripMenuItem
             // 
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             logoutToolStripMenuItem.Size = new Size(57, 20);
             logoutToolStripMenuItem.Text = "Logout";
+            logoutToolStripMenuItem.Click += LogoutToolStripMenuItem_Click;
             // 
             // societiesPanel
             // 
@@ -67,7 +87,6 @@ namespace SocietyManagementSystem
             societiesPanel.Name = "societiesPanel";
             societiesPanel.Size = new Size(776, 411);
             societiesPanel.TabIndex = 0;
-            societiesPanel.Paint += societiesPanel_Paint;
             // 
             // Dashboard
             // 
