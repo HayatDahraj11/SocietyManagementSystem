@@ -40,10 +40,11 @@ namespace SocietyManagementSystem
                 try
                 {
                     connection.Open();
-                    string query = "SELECT s.society_id, s.name, sm.role " +
-                                   "FROM societies s " +
-                                   "JOIN society_members sm ON s.society_id = sm.society_id " +
-                                   "WHERE sm.user_id = @UserId;";
+                    string query = @"SELECT s.society_id AS SocietyID, s.name AS SocietyName, sr.role_name AS RoleName 
+                                     FROM societies s 
+                                     JOIN society_members sm ON s.society_id = sm.society_id 
+                                     JOIN society_roles sr ON sm.role_id = sr.role_id 
+                                     WHERE sm.user_id = @UserId;";
 
                     using (var command = new MySqlCommand(query, connection))
                     {
@@ -52,9 +53,9 @@ namespace SocietyManagementSystem
                         {
                             while (reader.Read())
                             {
-                                var societyId = reader["society_id"].ToString();
-                                var societyName = reader["name"].ToString();
-                                var role = reader["role"].ToString();
+                                var societyId = reader["SocietyID"].ToString();
+                                var societyName = reader["SocietyName"].ToString();
+                                var role = reader["RoleName"].ToString();
 
                                 ListViewItem item = new ListViewItem(new[] { societyName, role })
                                 {

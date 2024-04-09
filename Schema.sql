@@ -26,18 +26,24 @@ CREATE TABLE societies (
     FOREIGN KEY (founder_id) REFERENCES users(user_id),
     FOREIGN KEY (mentor_id) REFERENCES users(user_id)
 );
-
+CREATE TABLE society_roles (
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(255) NOT NULL
+);
 -- Society Members table (links users to societies with roles)
 CREATE TABLE society_members (
     society_member_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     society_id INT NOT NULL,
-    role ENUM('president', 'ec_member', 'member') NOT NULL,
-    `status` ENUM('pending', 'approved', 'rejected') DEFAULT NULL,
+    role_id INT NOT NULL,
     join_date DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (society_id) REFERENCES societies(society_id)
+    FOREIGN KEY (society_id) REFERENCES societies(society_id),
+    FOREIGN KEY (role_id) REFERENCES society_roles(role_id)
+    
 );
+
+
 
 -- Events table (information about events organized by the societies)
 CREATE TABLE `events` (
@@ -59,8 +65,13 @@ CREATE TABLE event_registrations (
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
-select * from users;
-select * from society_members;
+
+-- Insert into society_roles
+INSERT INTO society_roles (role_name) VALUES
+('president'),
+('member'),
+('ec_member');
+
 -- Trigger to update society members
 DELIMITER $$
 
@@ -68,8 +79,8 @@ CREATE TRIGGER after_society_creation
 AFTER INSERT ON societies
 FOR EACH ROW
 BEGIN
-  INSERT INTO society_members (user_id, society_id, role, join_date) 
-  VALUES (NEW.founder_id, NEW.society_id, 'president', NEW.creation_date);
+  INSERT INTO society_members (user_id, society_id, role_id, join_date) 
+  VALUES (NEW.founder_id, NEW.society_id, 1, NEW.creation_date);
 END$$
 
 DELIMITER ;
@@ -87,10 +98,12 @@ INSERT INTO societies (name, description, creation_date, founder_id, mentor_id, 
 ('Tech Society', 'A society for technology enthusiasts.', '2023-01-05', 1, 2, 'approved'),
 ('Art Society', 'A society for art lovers.', '2023-01-06', 3, 2, 'pending');
 
+
+
 -- Insert society members (linking users to societies with roles)
-INSERT INTO society_members (user_id, society_id, role, join_date) VALUES
-(3, 1, 'member', '2023-01-08'),
-(4, 1, 'ec_member', '2023-01-09');
+INSERT INTO society_members (user_id, society_id, role_id, join_date) VALUES
+(3, 1, 2, '2023-01-08'),
+(4, 1, 3, '2023-01-09');
 
 -- Insert events organized by the societies
 INSERT INTO `events` (society_id, name, description, event_date, location) VALUES

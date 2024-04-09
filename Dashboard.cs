@@ -36,6 +36,33 @@ namespace SocietyManagementSystem
                 this.yourSocietiesToolStripMenuItem.Visible = true;
                 this.manageSocietiesToolStripMenuItem.Visible = false;
                 this.manageEventsToolStripMenuItem.Visible = false;
+
+                // gets all the societies names the user is president of
+                string connectionString = GlobalConfig.ConnectionString;
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    var query = "SELECT society_id, name FROM societies WHERE founder_id = @userId";
+                    using (var cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", SessionManager.GetInstance().GetUserId());
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int societyId = reader.GetInt32(0);
+                                string societyName = reader.GetString(1);
+                                ToolStripMenuItem societyMenuItem = new ToolStripMenuItem
+                                {
+                                    Text = societyName,
+                                    Tag = societyId
+                                };
+                                societyMenuItem.Click += SocietyMenuItem_Click;
+                                this.menuStrip1.Items.Add(societyMenuItem);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -141,6 +168,13 @@ namespace SocietyManagementSystem
             // Implementation for opening the RegisterSociety form
             RegisterSociety registerSociety = new RegisterSociety();
             registerSociety.Show();
+        }
+
+        private void SocietyMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open the society dashboard
+            SocietyPresidentDashboard societyPresidentDashboard = new SocietyPresidentDashboard((int)((ToolStripMenuItem)sender).Tag);
+            societyPresidentDashboard.Show();
         }
 
 

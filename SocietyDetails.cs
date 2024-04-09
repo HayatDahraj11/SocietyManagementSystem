@@ -39,7 +39,7 @@ namespace SocietyManagementSystem
                     }
 
                     // Load members
-                    cmd = new MySqlCommand("SELECT u.full_name, sm.role FROM society_members sm JOIN users u ON sm.user_id = u.user_id WHERE sm.society_id = @societyId", connection);
+                    cmd = new MySqlCommand("SELECT u.full_name, sr.role_name AS role FROM society_members sm JOIN users u ON sm.user_id = u.user_id JOIN society_roles sr ON sm.role_id = sr.role_id WHERE sm.society_id = @societyId;", connection);
                     cmd.Parameters.AddWithValue("@societyId", societyId);
                     using (var reader = cmd.ExecuteReader())
                     {

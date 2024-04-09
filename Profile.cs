@@ -88,10 +88,12 @@ namespace SocietyManagementSystem
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var cmd = new MySqlCommand(@"SELECT societies.name AS SocietyName, society_members.role 
-                                     FROM societies 
-                                     JOIN society_members ON societies.society_id = society_members.society_id 
-                                     WHERE society_members.user_id = @UserId", connection);
+                var cmd = new MySqlCommand(@"SELECT societies.name AS SocietyName, sr.role_name AS RoleName 
+                     FROM societies 
+                     JOIN society_members sm ON societies.society_id = sm.society_id 
+                     JOIN society_roles sr ON sm.role_id = sr.role_id 
+                     WHERE sm.user_id = @UserId", connection);
+
                 cmd.Parameters.AddWithValue("@UserId", SessionManager.GetInstance().GetUserId());
 
                 using (var reader = cmd.ExecuteReader())
@@ -100,9 +102,10 @@ namespace SocietyManagementSystem
                     while (reader.Read())
                     {
                         var item = new ListViewItem(reader["SocietyName"].ToString());
-                        item.SubItems.Add(reader["role"].ToString());
+                        item.SubItems.Add(reader["RoleName"].ToString());
                         lvSocieties.Items.Add(item);
                     }
+                    lvSocieties.Refresh();
                 }
             }
         }

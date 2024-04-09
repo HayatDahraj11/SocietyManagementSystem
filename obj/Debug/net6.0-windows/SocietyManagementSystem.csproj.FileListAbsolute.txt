@@ -85,3 +85,5 @@ C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.sourcelink.json
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyM.F1FA37E7.Up2Date
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ManageSocieties.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.SocietyPresidentDashboard.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ChangeMemberRoleForm.resources
