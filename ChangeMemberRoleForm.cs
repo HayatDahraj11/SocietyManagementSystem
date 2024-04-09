@@ -48,6 +48,20 @@ namespace SocietyManagementSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (cmbRoles.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a role");
+                return;
+            }
+            if (MessageBox.Show("Are you sure you want to update the role?", "Update Role", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+            if (this.userId == SessionManager.GetInstance().GetUserId())
+            {
+                MessageBox.Show("You cannot change your own role");
+                return;
+            }
             // Get the selected role
             KeyValuePair<int, string> selectedRole = (KeyValuePair<int, string>)cmbRoles.SelectedItem;
             int roleID = selectedRole.Key;

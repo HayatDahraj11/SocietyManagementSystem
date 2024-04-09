@@ -98,8 +98,6 @@ INSERT INTO societies (name, description, creation_date, founder_id, mentor_id, 
 ('Tech Society', 'A society for technology enthusiasts.', '2023-01-05', 1, 2, 'approved'),
 ('Art Society', 'A society for art lovers.', '2023-01-06', 3, 2, 'pending');
 
-
-
 -- Insert society members (linking users to societies with roles)
 INSERT INTO society_members (user_id, society_id, role_id, join_date) VALUES
 (3, 1, 2, '2023-01-08'),
