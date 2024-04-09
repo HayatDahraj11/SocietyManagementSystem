@@ -18,32 +18,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ChangePassword.cs">
+    <Compile Update="Business Logic Layer\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Profile.cs">
+    <Compile Update="Business Logic Layer\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Dashboard.cs" />
-    <Compile Update="RegisterSociety.cs">
+    <Compile Update="Business Logic Layer\Dashboard.cs" />
+    <Compile Update="Business Logic Layer\RegisterSociety.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="SocietyDetails.cs">
+    <Compile Update="Business Logic Layer\SocietyDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="RegistrationForm.cs">
+    <Compile Update="Business Logic Layer\RegistrationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSocieties.cs">
+    <Compile Update="Business Logic Layer\ManageSocieties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="SocietyPresidentDashboard.cs">
+    <Compile Update="Business Logic Layer\SocietyPresidentDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ChangeMemberRoleForm.cs">
+    <Compile Update="Business Logic Layer\ChangeMemberRoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="JoinSociety.cs">
+    <Compile Update="Business Logic Layer\JoinSociety.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using SocietyManagementSystem.Data_Access_Layer;
 
 namespace SocietyManagementSystem
 {
     public partial class UserSocietiesForm : Form
     {
         private int _currentUserId;
-
+        private GetData data = new GetData();
 
         public UserSocietiesForm(int userId)
         {
@@ -34,45 +34,24 @@ namespace SocietyManagementSystem
             // Clear the ListView
             lvSocieties.Items.Clear();
 
-            string connectionString = GlobalConfig.ConnectionString;
-            using (var connection = new MySqlConnection(connectionString))
+            // Use data access layer method to retrieve user societies
+            UsersSocietiesData socitiesData = data.GetAllUserSocieties(_currentUserId);
+
+            if (socitiesData != null)
             {
-                try
+                foreach (var s in socitiesData.Societies)
                 {
-                    connection.Open();
-                    string query = @"SELECT s.society_id AS SocietyID, s.name AS SocietyName, sr.role_name AS RoleName 
-                                     FROM societies s 
-                                     JOIN society_members sm ON s.society_id = sm.society_id 
-                                     JOIN society_roles sr ON sm.role_id = sr.role_id 
-                                     WHERE sm.user_id = @UserId;";
-
-                    using (var command = new MySqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserId", _currentUserId);
-                        using (var reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var societyId = reader["SocietyID"].ToString();
-                                var societyName = reader["SocietyName"].ToString();
-                                var role = reader["RoleName"].ToString();
-
-                                ListViewItem item = new ListViewItem(new[] { societyName, role })
-                                {
-                                    Tag = societyId
-                                };
-                                lvSocieties.Items.Add(item);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while loading societies: " + ex.Message);
+                    ListViewItem item = new ListViewItem(s.SocietyName);
+                    item.SubItems.Add(s.RoleName);
+                    item.Tag = s.SocietyID;
+                    lvSocieties.Items.Add(item);
                 }
             }
+            else
+            {
+                MessageBox.Show("Failed to load user societies.");
+            }
         }
-
 
         // Event handler for when a society is selected from the ListView.
         private void lvSocieties_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,6 +76,5 @@ namespace SocietyManagementSystem
             var societyDetailsForm = new SocietyDetails(selectedSocietyId);
             societyDetailsForm.Show();
         }
-
     }
 }

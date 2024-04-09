@@ -74,6 +74,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "ChangeMemberRoleForm";
             Text = "Change Member Role";
+            Load += ChangeMemberRoleForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

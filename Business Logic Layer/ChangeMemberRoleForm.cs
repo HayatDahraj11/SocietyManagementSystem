@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using SocietyManagementSystem.Data_Access_Layer;
 
 
 namespace SocietyManagementSystem
@@ -21,25 +21,8 @@ namespace SocietyManagementSystem
 
         private void LoadRoles()
         {
-            roles = new Dictionary<int, string>();
-
-            using (MySqlConnection connection = new MySqlConnection(GlobalConfig.ConnectionString))
-            {
-                connection.Open();
-                var query = "SELECT role_id, role_name FROM society_roles";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int roleId = reader.GetInt32(0);
-                            string roleName = reader.GetString(1);
-                            roles.Add(roleId, roleName);
-                        }
-                    }
-                }
-            }
+            GetData data = new GetData();
+            roles = data.GetRoles();
 
             cmbRoles.DataSource = new BindingSource(roles, null);
             cmbRoles.DisplayMember = "Value";
@@ -66,24 +49,19 @@ namespace SocietyManagementSystem
             KeyValuePair<int, string> selectedRole = (KeyValuePair<int, string>)cmbRoles.SelectedItem;
             int roleID = selectedRole.Key;
 
-            using (MySqlConnection connection = new MySqlConnection(GlobalConfig.ConnectionString))
-            {
-                connection.Open();
-                var query = "UPDATE society_members SET role_id = @roleID WHERE society_id = @societyId AND user_id = @userId";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@roleID", roleID);
-                    cmd.Parameters.AddWithValue("@societyId", this.societyId);
-                    cmd.Parameters.AddWithValue("@userId", this.userId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
+            GetData getData = new GetData();
+            getData.UpdateRole(societyId, userId, roleID);
 
             MessageBox.Show("Role updated successfully");
             this.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangeMemberRoleForm_Load(object sender, EventArgs e)
         {
 
         }
