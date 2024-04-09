@@ -78,16 +78,16 @@ namespace SocietyManagementSystem
             // Check if the button clicked is the Accept button
             if (e.ColumnIndex == societiesGrid.Columns["AcceptButton"].Index)
             {
-
                 // Get the society name
                 string societyName = societiesGrid.Rows[e.RowIndex].Cells["SocietyName"].Value.ToString();
 
-                // Update the status of the society to 'Approved'
+                // Update the status of the society to 'Approved' and set the mentor name
                 using (var connection = new MySqlConnection(GlobalConfig.ConnectionString))
                 {
                     connection.Open();
-                    var cmd = new MySqlCommand(@"UPDATE societies SET status = 'Approved' WHERE name = @name", connection);
+                    var cmd = new MySqlCommand(@"UPDATE societies SET status = 'Approved', mentor_id = @mentor_id WHERE name = @name", connection);
                     cmd.Parameters.AddWithValue("@name", societyName);
+                    cmd.Parameters.AddWithValue("@mentor_id", SessionManager.GetInstance().GetUserId());
                     cmd.ExecuteNonQuery();
                 }
 

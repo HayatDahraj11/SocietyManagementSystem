@@ -4,7 +4,7 @@ namespace SocietyManagementSystem
 {
     public partial class Dashboard : Form
     {
-        private static Dashboard instance;
+        private static Dashboard? instance;
 
         public static Dashboard GetInstance()
         {
@@ -69,37 +69,37 @@ namespace SocietyManagementSystem
                                 string description = reader["description"].ToString();
                                 string status = reader["status"].ToString();
 
-                                if (status == "pending")
+                                if (status == "approved")
                                 {
-                                    continue;
+
+
+                                    Label nameLabel = new Label
+                                    {
+                                        Text = name,
+                                        Font = new Font("Arial", 14, FontStyle.Bold),
+                                        AutoSize = true,
+                                        Location = new Point(5, yOffset),
+                                        Tag = societyId
+                                    };
+                                    nameLabel.Click += (s, e) =>
+                                    {
+                                        int id = Convert.ToInt32(nameLabel.Tag);
+                                        var societyDetails = new SocietyDetails(id); // Ensure SocietyDetails form exists
+                                        societyDetails.Show();
+                                    };
+                                    this.societiesPanel.Controls.Add(nameLabel);
+                                    yOffset += nameLabel.Height + spacing;
+
+                                    Label descriptionLabel = new Label
+                                    {
+                                        Text = description,
+                                        Font = new Font("Arial", 10),
+                                        AutoSize = true,
+                                        Location = new Point(5, yOffset)
+                                    };
+                                    this.societiesPanel.Controls.Add(descriptionLabel);
+                                    yOffset += descriptionLabel.Height + spacing;
                                 }
-
-                                Label nameLabel = new Label
-                                {
-                                    Text = name,
-                                    Font = new Font("Arial", 14, FontStyle.Bold),
-                                    AutoSize = true,
-                                    Location = new Point(5, yOffset),
-                                    Tag = societyId
-                                };
-                                nameLabel.Click += (s, e) =>
-                                {
-                                    int id = Convert.ToInt32(nameLabel.Tag);
-                                    var societyDetails = new SocietyDetails(id); // Ensure SocietyDetails form exists
-                                    societyDetails.Show();
-                                };
-                                this.societiesPanel.Controls.Add(nameLabel);
-                                yOffset += nameLabel.Height + spacing;
-
-                                Label descriptionLabel = new Label
-                                {
-                                    Text = description,
-                                    Font = new Font("Arial", 10),
-                                    AutoSize = true,
-                                    Location = new Point(5, yOffset)
-                                };
-                                this.societiesPanel.Controls.Add(descriptionLabel);
-                                yOffset += descriptionLabel.Height + spacing;
                             }
                         }
                     }
