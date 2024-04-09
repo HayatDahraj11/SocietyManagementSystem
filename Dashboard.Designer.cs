@@ -10,6 +10,7 @@ namespace SocietyManagementSystem
         private ToolStripMenuItem manageEventsToolStripMenuItem;
         private ToolStripMenuItem manageSocietiesToolStripMenuItem;
         private ToolStripMenuItem registerSocietyToolStripMenuItem;
+        private ToolStripMenuItem joinSocietyToolStripMenuItem;
         private ToolStripMenuItem logoutToolStripMenuItem;
         private Panel societiesPanel;
 
@@ -21,6 +22,7 @@ namespace SocietyManagementSystem
             registerSocietyToolStripMenuItem = new ToolStripMenuItem();
             manageSocietiesToolStripMenuItem = new ToolStripMenuItem();
             manageEventsToolStripMenuItem = new ToolStripMenuItem();
+            joinSocietyToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
             societiesPanel = new Panel();
             menuStrip1.SuspendLayout();
@@ -29,7 +31,7 @@ namespace SocietyManagementSystem
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, manageSocietiesToolStripMenuItem, manageEventsToolStripMenuItem, logoutToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, manageSocietiesToolStripMenuItem, manageEventsToolStripMenuItem, joinSocietyToolStripMenuItem, logoutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
@@ -71,7 +73,13 @@ namespace SocietyManagementSystem
             registerSocietyToolStripMenuItem.Size = new Size(102, 20);
             registerSocietyToolStripMenuItem.Text = "Register Society";
             registerSocietyToolStripMenuItem.Click += registerSocietyToolStripMenuItem_Click_1;
-            
+            // 
+            // joinSocietyToolStripMenuItem
+            // 
+            joinSocietyToolStripMenuItem.Name = "joinSocietyToolStripMenuItem";
+            joinSocietyToolStripMenuItem.Size = new Size(122, 20);
+            joinSocietyToolStripMenuItem.Text = "Join Society";
+            joinSocietyToolStripMenuItem.Click += JoinSocietyToolStripMenuItem_Click;
             // 
             // logoutToolStripMenuItem
             // 

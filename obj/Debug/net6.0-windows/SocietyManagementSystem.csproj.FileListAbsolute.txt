@@ -87,3 +87,4 @@ C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ManageSocieties.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.SocietyPresidentDashboard.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ChangeMemberRoleForm.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.JoinSociety.resources

@@ -43,6 +43,9 @@
     <Compile Update="ChangeMemberRoleForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="JoinSociety.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

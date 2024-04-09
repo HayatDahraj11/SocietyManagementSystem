@@ -29,6 +29,7 @@ namespace SocietyManagementSystem
                 this.yourSocietiesToolStripMenuItem.Visible = false;
                 this.manageSocietiesToolStripMenuItem.Visible = true;
                 this.manageEventsToolStripMenuItem.Visible = true;
+                this.joinSocietyToolStripMenuItem.Visible = false;
             }
             else if (userRole == "student")
             {
@@ -36,6 +37,8 @@ namespace SocietyManagementSystem
                 this.yourSocietiesToolStripMenuItem.Visible = true;
                 this.manageSocietiesToolStripMenuItem.Visible = false;
                 this.manageEventsToolStripMenuItem.Visible = false;
+                this.joinSocietyToolStripMenuItem.Visible = true;
+
 
                 // gets all the societies names the user is president of
                 string connectionString = GlobalConfig.ConnectionString;
@@ -191,6 +194,16 @@ namespace SocietyManagementSystem
             manageSocietiesForm.Show();
 
         }
+
+        //JoinSocietyToolStripMenuItem_Click
+        private void JoinSocietyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open Join Society form
+            JoinSociety joinSocietyForm = new JoinSociety();
+            joinSocietyForm.Show();
+        }
+
+
     }
 
 
