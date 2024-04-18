@@ -2,6 +2,6 @@
 {
     public static class GlobalConfig
     {
-        public static string ConnectionString { get; set; } = "server=localhost;database=sms;uid=root;pwd=szaib;";
+        public static string ConnectionString { get; set; } = "server=localhost;database=sms;uid=root;pwd=hayat;";
     }
 }

@@ -22,6 +22,7 @@ namespace SocietyManagementSystem
         private Label lblFounder;
         private Label lblMentor;
         private ListView lvMembers;
+        private ListView lvEvents; // New ListView for displaying events
         private void InitializeComponent()
         {
             lblSocietyName = new Label();
@@ -31,6 +32,7 @@ namespace SocietyManagementSystem
             lblFounder = new Label();
             lblMentor = new Label();
             lvMembers = new ListView();
+            lvEvents = new ListView(); // Initializing the new ListView for events
             SuspendLayout();
             // 
             // lblSocietyName
@@ -86,13 +88,29 @@ namespace SocietyManagementSystem
             lvMembers.Location = new Point(18, 150);
             lvMembers.Margin = new Padding(3, 2, 3, 2);
             lvMembers.Name = "lvMembers";
-            lvMembers.Size = new Size(666, 151);
+            lvMembers.Size = new Size(666, 100);
             lvMembers.TabIndex = 6;
             lvMembers.UseCompatibleStateImageBehavior = false;
             lvMembers.View = View.Details;
             lvMembers.Columns.Add("Member Name", -2, HorizontalAlignment.Left);
             lvMembers.Columns.Add("Role", -2, HorizontalAlignment.Left);
             lvMembers.SelectedIndexChanged += lvMembers_SelectedIndexChanged;
+
+            // 
+            // lvEvents
+            // 
+            lvEvents.Location = new Point(18, 270);
+            lvEvents.Margin = new Padding(3, 2, 3, 2);
+            lvEvents.Name = "lvEvents";
+            lvEvents.Size = new Size(666, 100);
+            lvEvents.TabIndex = 7;
+            lvEvents.UseCompatibleStateImageBehavior = false;
+            lvEvents.View = View.Details;
+            lvEvents.Columns.Add("Event Name", -2, HorizontalAlignment.Left);
+            lvEvents.Columns.Add("Description", -2, HorizontalAlignment.Left);
+            lvEvents.Columns.Add("Date", -2, HorizontalAlignment.Left);
+            // 
+
             // 
             // SocietyDetails
             // 
@@ -106,6 +124,7 @@ namespace SocietyManagementSystem
             Controls.Add(lblFounder);
             Controls.Add(lblMentor);
             Controls.Add(lvMembers);
+            Controls.Add(lvEvents); // Adding the new ListView for events
             Margin = new Padding(3, 2, 3, 2);
             Name = "SocietyDetails";
             Text = "Society Details";

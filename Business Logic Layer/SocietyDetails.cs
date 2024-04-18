@@ -27,14 +27,28 @@ namespace SocietyManagementSystem
                 lblFounder.Text = $"Founder: {detailsData.Founder}";
                 lblMentor.Text = $"Mentor: {detailsData.Mentor}";
 
+                // Load members
                 lvMembers.Items.Clear(); // Clear existing items before adding new ones
                 foreach (var member in detailsData.Members)
                 {
                     ListViewItem item = new ListViewItem(new[] {
-                        member.FullName,
-                        member.Role
-                    });
+                member.FullName,
+                member.Role
+            });
                     lvMembers.Items.Add(item);
+                }
+
+                // Load events
+                lvEvents.Items.Clear(); // Clear existing items before adding new ones
+                List<EventData> events = getData.GetEventsForSociety(societyId); // Assuming a method to retrieve events for the society from the database
+                foreach (var eventData in events)
+                {
+                    ListViewItem item = new ListViewItem(new[] {
+                eventData.Name,
+                eventData.Description,
+                eventData.EventDate.ToShortDateString() // Assuming EventDate is of type DateTime
+            });
+                    lvEvents.Items.Add(item);
                 }
             }
             else
@@ -42,6 +56,7 @@ namespace SocietyManagementSystem
                 MessageBox.Show("Failed to load society details.");
             }
         }
+
 
         private void lvMembers_SelectedIndexChanged(object sender, EventArgs e)
         {

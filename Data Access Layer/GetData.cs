@@ -31,6 +31,7 @@ namespace SocietyManagementSystem.Data_Access_Layer
             return roles;
         }
 
+
         public void UpdateRole(int societyId, int userId, int roleId)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -612,6 +613,97 @@ namespace SocietyManagementSystem.Data_Access_Layer
             return socitiesData;
         }
 
+
+
+
+        public List<EventData> GetEventsForSociety(int societyId)
+        {
+            List<EventData> events = new List<EventData>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM events WHERE society_id = @societyId";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@societyId", societyId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EventData eventData = new EventData
+                            {
+                                EventId = Convert.ToInt32(reader["event_id"]),
+                                Name = reader["name"].ToString(),
+                                Description = reader["description"].ToString(),
+                                EventDate = Convert.ToDateTime(reader["event_date"]),
+                                SocietyId = Convert.ToInt32(reader["society_id"])
+                            };
+                            events.Add(eventData);
+                        }
+                    }
+                }
+            }
+
+            return events;
+        }
+        public bool AddEvent(string name, string description, DateTime eventDate, int societyId)
+        {
+            bool success = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "INSERT INTO events (name, description, event_date, society_id) VALUES (@name, @description, @eventDate, @societyId)";
+                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@description", description);
+                    command.Parameters.AddWithValue("@eventDate", eventDate);
+                    command.Parameters.AddWithValue("@societyId", societyId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        success = true;
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return success;
+        }
+
+        public bool DeleteEvent(int eventId)
+        {
+            bool success = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM events WHERE event_id = @eventId";
+                    command.Parameters.AddWithValue("@eventId", eventId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        success = true;
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return success;
+        }
+
     }
 
     public class SocitiesList
@@ -677,5 +769,14 @@ namespace SocietyManagementSystem.Data_Access_Layer
         public int SocietyId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+    }
+
+    public class EventData
+    {
+        public int EventId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime EventDate { get; set; }
+        public int SocietyId { get; set; }
     }
 }

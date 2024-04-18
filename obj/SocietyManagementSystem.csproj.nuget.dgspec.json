@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {}
+    "C:\\Users\\hayat\\source\\repos\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {
+    "C:\\Users\\hayat\\source\\repos\\SocietyManagementSystem\\SocietyManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
+        "projectUniqueName": "C:\\Users\\hayat\\source\\repos\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
         "projectName": "SocietyManagementSystem",
-        "projectPath": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
-        "packagesPath": "C:\\Users\\shahz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shahz\\source\\repos\\HayatDahraj11\\SocietyManagementSystem\\obj\\",
+        "projectPath": "C:\\Users\\hayat\\source\\repos\\SocietyManagementSystem\\SocietyManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\hayat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hayat\\source\\repos\\SocietyManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\shahz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hayat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -73,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

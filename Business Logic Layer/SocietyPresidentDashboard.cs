@@ -12,6 +12,7 @@ namespace SocietyManagementSystem
             InitializeComponent();
             this.societyId = societyId;
             LoadMembers();
+            LoadEvents();
         }
 
         private void LoadMembers()
@@ -72,6 +73,56 @@ namespace SocietyManagementSystem
                     LoadMembers();
                 }
             }
+        }
+        private void buttonRemoveEvent_Click(object sender, EventArgs e)
+        {
+            // Get the selected event
+            if (listViewEvents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewEvents.SelectedItems[0];
+                int selectedEventId = (int)selectedItem.Tag;
+                if (MessageBox.Show("Are you sure you want to remove this event?", "Remove Event", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    // Use GetData method to remove the event
+                    getData.DeleteEvent(selectedEventId);
+                }
+            }
+        }
+
+        private void buttonAddEvent_Click(object sender, EventArgs e)
+        {
+            // Open a form to add a new event
+            AddEventForm addEventForm = new AddEventForm(societyId);
+            addEventForm.ShowDialog();
+        }
+        private void LoadEvents()
+        {
+            listViewEvents.Items.Clear();
+
+            // Use GetData method to retrieve events for the society
+            List<EventData> events = getData.GetEventsForSociety(societyId);
+
+            if (events != null)
+            {
+                foreach (var eventData in events)
+                {
+                    ListViewItem item = new ListViewItem(eventData.Name);
+                    item.SubItems.Add(eventData.Description);
+                    item.SubItems.Add(eventData.EventDate.ToShortDateString()); // Format date as needed
+                    item.Tag = eventData.EventId; // Store event ID in the Tag property for later reference
+                    listViewEvents.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to load events.");
+            }
+        }
+
+
+        private void SocietyPresidentDashboard_Load(object sender, EventArgs e)
+        {
+            // Optionally, perform any actions needed when the form is loaded
         }
     }
 }
