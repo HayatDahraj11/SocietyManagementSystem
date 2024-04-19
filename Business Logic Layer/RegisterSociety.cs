@@ -23,7 +23,7 @@ namespace SocietyManagementSystem
 
                 if (result)
                 {
-                    MessageBox.Show("Society registered successfully.");
+                    MessageBox.Show("Society requested for registration!\nWait for Approval from a mentor.");
                     txtSocietyName.Text = "";
                     txtDescription.Text = "";
                     this.Close();

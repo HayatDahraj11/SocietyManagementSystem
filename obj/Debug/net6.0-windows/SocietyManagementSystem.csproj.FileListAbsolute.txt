@@ -140,3 +140,4 @@ C:\Users\hayat\source\repos\SocietyManagementSystem\obj\Debug\net6.0-windows\Soc
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.AddEventForm.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.RequestBudgetForm.resources
 C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.ManageEvents.resources
+C:\Users\shahz\source\repos\HayatDahraj11\SocietyManagementSystem\obj\Debug\net6.0-windows\SocietyManagementSystem.JoinEventsForm.resources

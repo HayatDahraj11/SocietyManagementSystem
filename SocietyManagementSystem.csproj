@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Business Logic Layer\JoinEventsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Business Logic Layer\ManageEvents.cs">
       <SubType>Form</SubType>
     </Compile>

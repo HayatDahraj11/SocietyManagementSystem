@@ -38,6 +38,55 @@ namespace SocietyManagementSystem
             }
         }
 
+        private void LoadEvents()
+        {
+            listViewEvents.Items.Clear();
+
+            // Use GetData method to retrieve events for the society
+            List<EventData> events = getData.GetEventsForSociety(societyId);
+
+            if (events != null)
+            {
+                foreach (var eventData in events)
+                {
+                    ListViewItem item = new ListViewItem(eventData.Name);
+                    item.SubItems.Add(eventData.Description);
+                    item.SubItems.Add(eventData.EventDate.ToShortDateString()); // Format date as needed
+                    item.Tag = eventData.EventId; // Store event ID in the Tag property for later reference
+                    listViewEvents.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to load events.");
+            }
+
+        }
+
+        // Method to load and display budget requests
+        private void LoadBudgetRequests()
+        {
+            listViewBudgetRequests.Items.Clear();
+
+            // Use GetData method to retrieve budget requests
+            List<BudgetRequestData> budgetRequests = getData.GetBudgetRequestsForSociety(societyId);
+
+            if (budgetRequests != null)
+            {
+                foreach (var budgetRequest in budgetRequests)
+                {
+                    ListViewItem item = new ListViewItem(budgetRequest.EventName);
+                    item.SubItems.Add(budgetRequest.Status);
+                    item.SubItems.Add(budgetRequest.Description);
+                    listViewBudgetRequests.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to load budget requests.");
+            }
+        }
+
         private void buttonChangeRole_Click(object sender, EventArgs e)
         {
             // Get the selected member
@@ -89,8 +138,9 @@ namespace SocietyManagementSystem
                     getData.DeleteEvent(selectedEventId);
                 }
             }
-            // Update the list view
+            // Update the list views
             LoadEvents();
+            LoadBudgetRequests();
         }
 
         private void buttonAddEvent_Click(object sender, EventArgs e)
@@ -112,57 +162,10 @@ namespace SocietyManagementSystem
                 RequestBudgetForm requestBudgetForm = new RequestBudgetForm(societyId, SessionManager.GetInstance().GetUserId(), selectedEventId);
                 requestBudgetForm.ShowDialog();
             }
-        }
-
-        private void LoadEvents()
-        {
-            listViewEvents.Items.Clear();
-
-            // Use GetData method to retrieve events for the society
-            List<EventData> events = getData.GetEventsForSociety(societyId);
-
-            if (events != null)
-            {
-                foreach (var eventData in events)
-                {
-                    ListViewItem item = new ListViewItem(eventData.Name);
-                    item.SubItems.Add(eventData.Description);
-                    item.SubItems.Add(eventData.EventDate.ToShortDateString()); // Format date as needed
-                    item.Tag = eventData.EventId; // Store event ID in the Tag property for later reference
-                    listViewEvents.Items.Add(item);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Failed to load events.");
-            }
+            // Refresh Request Budgets List
+            LoadBudgetRequests();
 
         }
-
-        // Method to load and display budget requests
-        private void LoadBudgetRequests()
-        {
-            listViewBudgetRequests.Items.Clear();
-
-            // Use GetData method to retrieve budget requests
-            List<BudgetRequestData> budgetRequests = getData.GetBudgetRequestsForSociety(societyId);
-
-            if (budgetRequests != null)
-            {
-                foreach (var budgetRequest in budgetRequests)
-                {
-                    ListViewItem item = new ListViewItem(budgetRequest.EventName);
-                    item.SubItems.Add(budgetRequest.Status);
-                    item.SubItems.Add(budgetRequest.Description);
-                    listViewBudgetRequests.Items.Add(item);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Failed to load budget requests.");
-            }
-        }
-
 
         private void SocietyPresidentDashboard_Load(object sender, EventArgs e)
         {

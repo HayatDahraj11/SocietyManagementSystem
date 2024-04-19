@@ -163,6 +163,13 @@ namespace SocietyManagementSystem
             joinSocietyForm.Show();
         }
 
+        private void JoinEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open Join Events form
+            JoinEventsForm joinEventsForm = new JoinEventsForm();
+            joinEventsForm.Show();
+        }
+
 
     }
 

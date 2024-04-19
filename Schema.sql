@@ -23,8 +23,8 @@ CREATE TABLE societies (
     founder_id INT,
     mentor_id INT DEFAULT 1, -- Mentor who approves the society
     `status` ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    FOREIGN KEY (founder_id) REFERENCES users(user_id),
-    FOREIGN KEY (mentor_id) REFERENCES users(user_id)
+    FOREIGN KEY (founder_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (mentor_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 CREATE TABLE society_roles (
     role_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,13 +37,10 @@ CREATE TABLE society_members (
     society_id INT NOT NULL,
     role_id INT NOT NULL,
     join_date DATE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (society_id) REFERENCES societies(society_id),
-    FOREIGN KEY (role_id) REFERENCES society_roles(role_id)
-    
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (society_id) REFERENCES societies(society_id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES society_roles(role_id) ON DELETE CASCADE
 );
-
-
 
 -- Events table (information about events organized by the societies)
 CREATE TABLE `events` (
@@ -53,7 +50,7 @@ CREATE TABLE `events` (
     description TEXT,
     event_date DATE NOT NULL,
     location VARCHAR(255) NOT NULL,
-    FOREIGN KEY (society_id) REFERENCES societies(society_id)
+    FOREIGN KEY (society_id) REFERENCES societies(society_id) ON DELETE CASCADE
 );
 
 -- Event Registrations table (links users to events they've registered for)
@@ -62,8 +59,8 @@ CREATE TABLE event_registrations (
     user_id INT NOT NULL,
     event_id INT NOT NULL,
     registration_date DATE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
 
 CREATE TABLE resource_requests (
@@ -74,10 +71,10 @@ CREATE TABLE resource_requests (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     event_id INT, -- Nullable, if the request is event-specific
     mentor_id INT, -- ID of the mentor who approved/rejected the request
-    FOREIGN KEY (society_id) REFERENCES societies(society_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (event_id) REFERENCES events(event_id),
-    FOREIGN KEY (mentor_id) REFERENCES users(user_id)
+    FOREIGN KEY (society_id) REFERENCES societies(society_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+    FOREIGN KEY (mentor_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 
@@ -99,6 +96,7 @@ BEGIN
 END$$
 
 DELIMITER ;
+
 
 -- Dummy Data Insertion
 -- Insert dummy users (students, mentors)

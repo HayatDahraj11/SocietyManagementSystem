@@ -54,7 +54,7 @@ namespace SocietyManagementSystem
         private void eventsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Handle button clicks in the DataGridView
-            getData.HandleResourceRequestAction(sender, e, eventsGrid);
+            getData.HandleResourceRequestAction(sender, e, eventsGrid, SessionManager.GetInstance().GetUserId());
 
             // Refresh the Dashboard
             Dashboard dashboard = (Dashboard)Application.OpenForms["Dashboard"];

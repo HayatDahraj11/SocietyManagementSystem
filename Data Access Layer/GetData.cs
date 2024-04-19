@@ -159,7 +159,11 @@ namespace SocietyManagementSystem.Data_Access_Layer
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                var query = "SELECT society_id, name FROM societies WHERE society_id NOT IN (SELECT society_id FROM society_members WHERE user_id = @userId)";
+                var query = @"SELECT society_id, name 
+                      FROM societies 
+                      WHERE society_id NOT IN 
+                            (SELECT society_id FROM society_members WHERE user_id = @userId)
+                      AND status != 'pending'";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@userId", userId);
@@ -805,14 +809,14 @@ namespace SocietyManagementSystem.Data_Access_Layer
             }
         }
 
-        public void HandleResourceRequestAction(object sender, DataGridViewCellEventArgs e, DataGridView dataGridView)
+        public void HandleResourceRequestAction(object sender, DataGridViewCellEventArgs e, DataGridView dataGridView, int MentorID)
         {
             if (e.ColumnIndex == dataGridView.Columns["ApproveButton"].Index)
             {
                 string eventName = dataGridView.Rows[e.RowIndex].Cells["EventName"].Value.ToString();
                 string societyName = dataGridView.Rows[e.RowIndex].Cells["SocietyName"].Value.ToString();
                 string resourceName = dataGridView.Rows[e.RowIndex].Cells["ResourceName"].Value.ToString();
-                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Approved");
+                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Approved", MentorID);
                 RefreshDataGridViewEvents(dataGridView);
             }
             else if (e.ColumnIndex == dataGridView.Columns["RejectButton"].Index)
@@ -820,12 +824,12 @@ namespace SocietyManagementSystem.Data_Access_Layer
                 string eventName = dataGridView.Rows[e.RowIndex].Cells["EventName"].Value.ToString();
                 string societyName = dataGridView.Rows[e.RowIndex].Cells["SocietyName"].Value.ToString();
                 string resourceName = dataGridView.Rows[e.RowIndex].Cells["ResourceName"].Value.ToString();
-                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Rejected");
+                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Rejected", MentorID);
                 RefreshDataGridViewEvents(dataGridView);
             }
         }
 
-        private void UpdateResourceRequestStatus(string eventName, string societyName, string resourceName, string status)
+        private void UpdateResourceRequestStatus(string eventName, string societyName, string resourceName, string status, int MentorID)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -833,12 +837,13 @@ namespace SocietyManagementSystem.Data_Access_Layer
                 var cmd = new MySqlCommand(@"UPDATE resource_requests r " +
                                            "JOIN events e ON r.event_id = e.event_id " +
                                            "JOIN societies s ON r.society_id = s.society_id " +
-                                           "SET r.status = @status " +
+                                           "SET r.status = @status, r.mentor_id = @mentor_id " +
                                            "WHERE e.name = @eventName AND s.name = @societyName AND r.description = @resourceName", connection);
                 cmd.Parameters.AddWithValue("@eventName", eventName);
                 cmd.Parameters.AddWithValue("@societyName", societyName);
                 cmd.Parameters.AddWithValue("@resourceName", resourceName);
                 cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@mentor_id", MentorID);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -849,6 +854,105 @@ namespace SocietyManagementSystem.Data_Access_Layer
             LoadPendingResourceRequestsIntoGrid(dataGridView);
         }
 
+        public List<Event> GetAllEvents(int userId)
+        {
+            List<Event> events = new List<Event>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = @"SELECT e.event_id, e.name AS event_name, e.description, e.event_date, e.location,
+                             s.name AS society_name
+                      FROM events e
+                      INNER JOIN societies s ON e.society_id = s.society_id";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int eventId = reader.GetInt32("event_id");
+                            string eventName = reader.GetString("event_name");
+                            string description = reader.GetString("description");
+                            DateTime eventDate = reader.GetDateTime("event_date");
+                            string location = reader.GetString("location");
+                            string societyName = reader.GetString("society_name");
+
+                            // Check if the user is already registered for this event
+                            bool isRegistered = IsUserRegisteredForEvent(userId, eventId);
+
+                            if (!isRegistered)
+                            {
+                                events.Add(new Event
+                                {
+                                    EventId = eventId,
+                                    EventName = eventName,
+                                    Description = description,
+                                    EventDate = eventDate,
+                                    Location = location,
+                                    SocietyName = societyName
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+            return events;
+        }
+
+        private bool IsUserRegisteredForEvent(int userId, int eventId)
+        {
+            bool isRegistered = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = "SELECT COUNT(*) FROM event_registrations WHERE user_id = @userId AND event_id = @eventId";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@eventId", eventId);
+
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    isRegistered = count > 0;
+                }
+            }
+
+            return isRegistered;
+        }
+
+        internal bool JoinEvent(int userId, int eventId)
+        {
+            bool success = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = "INSERT INTO event_registrations (user_id, event_id, registration_date) VALUES (@userId, @eventId, @registrationDate)";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@eventId", eventId);
+                    cmd.Parameters.AddWithValue("@registrationDate", DateTime.Now); // Assuming current date/time for registration
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    success = rowsAffected > 0;
+                }
+            }
+
+            return success;
+        }
+    }
+
+    public class Event
+    {
+        public int EventId { get; set; }
+        public string EventName { get; set; }
+        public string Description { get; set; }
+        public DateTime EventDate { get; set; }
+        public string Location { get; set; }
+        public string SocietyName { get; set; }
     }
 
     public class BudgetRequestData

@@ -12,6 +12,7 @@ namespace SocietyManagementSystem
         private ToolStripMenuItem registerSocietyToolStripMenuItem;
         private ToolStripMenuItem joinSocietyToolStripMenuItem;
         private ToolStripMenuItem logoutToolStripMenuItem;
+        private ToolStripMenuItem joinEventToolStripMenuItem;
         private Panel societiesPanel;
 
         private void InitializeComponent()
@@ -24,6 +25,7 @@ namespace SocietyManagementSystem
             manageEventsToolStripMenuItem = new ToolStripMenuItem();
             joinSocietyToolStripMenuItem = new ToolStripMenuItem();
             logoutToolStripMenuItem = new ToolStripMenuItem();
+            joinEventToolStripMenuItem = new ToolStripMenuItem();
             societiesPanel = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -31,7 +33,7 @@ namespace SocietyManagementSystem
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, manageSocietiesToolStripMenuItem, manageEventsToolStripMenuItem, joinSocietyToolStripMenuItem, logoutToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { profileToolStripMenuItem, yourSocietiesToolStripMenuItem, registerSocietyToolStripMenuItem, manageSocietiesToolStripMenuItem, manageEventsToolStripMenuItem, joinSocietyToolStripMenuItem, joinEventToolStripMenuItem, logoutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
@@ -57,7 +59,7 @@ namespace SocietyManagementSystem
             // 
             manageEventsToolStripMenuItem.Name = "manageEventsToolStripMenuItem";
             manageEventsToolStripMenuItem.Size = new Size(102, 20);
-            manageEventsToolStripMenuItem.Text = "Manage Events";
+            manageEventsToolStripMenuItem.Text = "Manage Events Resources";
             manageEventsToolStripMenuItem.Click += ManageEventsToolStripMenuItem_Click;
             // 
             // yourSocietiesToolStripMenuItem
@@ -80,6 +82,13 @@ namespace SocietyManagementSystem
             joinSocietyToolStripMenuItem.Size = new Size(122, 20);
             joinSocietyToolStripMenuItem.Text = "Join Society";
             joinSocietyToolStripMenuItem.Click += JoinSocietyToolStripMenuItem_Click;
+            // 
+            // joinEventToolStripMenuItem
+            // 
+            joinEventToolStripMenuItem.Name = "joinEventToolStripMenuItem";
+            joinEventToolStripMenuItem.Size = new Size(122, 20);
+            joinEventToolStripMenuItem.Text = "Join Events";
+            joinEventToolStripMenuItem.Click += JoinEventToolStripMenuItem_Click;
             // 
             // logoutToolStripMenuItem
             // 
