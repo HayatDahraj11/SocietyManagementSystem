@@ -763,6 +763,92 @@ namespace SocietyManagementSystem.Data_Access_Layer
             return budgetRequests;
         }
 
+        public int GetPendingResourceRequestsCount()
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT COUNT(*) FROM resource_requests WHERE status = 'pending'";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                int count = Convert.ToInt32(command.ExecuteScalar());
+                return count;
+            }
+        }
+
+        public void LoadPendingResourceRequestsIntoGrid(DataGridView dataGridView)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var cmd = new MySqlCommand(@"SELECT e.name AS EventName, s.name AS SocietyName, r.description AS ResourceName, r.status AS Status " +
+                               "FROM events e " +
+                               "JOIN resource_requests r ON e.event_id = r.event_id " +
+                               "JOIN societies s ON r.society_id = s.society_id " +
+                               "WHERE r.status = 'pending'", connection);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int rowIndex = dataGridView.Rows.Add();
+                        DataGridViewRow row = dataGridView.Rows[rowIndex];
+
+                        row.Cells["EventName"].Value = reader["EventName"].ToString();
+                        row.Cells["SocietyName"].Value = reader["SocietyName"].ToString();
+                        row.Cells["ResourceName"].Value = reader["ResourceName"].ToString();
+                        row.Cells["Status"].Value = reader["Status"].ToString();
+
+                        row.Cells["ApproveButton"].Value = "Approve";
+                        row.Cells["RejectButton"].Value = "Reject";
+                    }
+                }
+            }
+        }
+
+        public void HandleResourceRequestAction(object sender, DataGridViewCellEventArgs e, DataGridView dataGridView)
+        {
+            if (e.ColumnIndex == dataGridView.Columns["ApproveButton"].Index)
+            {
+                string eventName = dataGridView.Rows[e.RowIndex].Cells["EventName"].Value.ToString();
+                string societyName = dataGridView.Rows[e.RowIndex].Cells["SocietyName"].Value.ToString();
+                string resourceName = dataGridView.Rows[e.RowIndex].Cells["ResourceName"].Value.ToString();
+                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Approved");
+                RefreshDataGridViewEvents(dataGridView);
+            }
+            else if (e.ColumnIndex == dataGridView.Columns["RejectButton"].Index)
+            {
+                string eventName = dataGridView.Rows[e.RowIndex].Cells["EventName"].Value.ToString();
+                string societyName = dataGridView.Rows[e.RowIndex].Cells["SocietyName"].Value.ToString();
+                string resourceName = dataGridView.Rows[e.RowIndex].Cells["ResourceName"].Value.ToString();
+                UpdateResourceRequestStatus(eventName, societyName, resourceName, "Rejected");
+                RefreshDataGridViewEvents(dataGridView);
+            }
+        }
+
+        private void UpdateResourceRequestStatus(string eventName, string societyName, string resourceName, string status)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var cmd = new MySqlCommand(@"UPDATE resource_requests r " +
+                                           "JOIN events e ON r.event_id = e.event_id " +
+                                           "JOIN societies s ON r.society_id = s.society_id " +
+                                           "SET r.status = @status " +
+                                           "WHERE e.name = @eventName AND s.name = @societyName AND r.description = @resourceName", connection);
+                cmd.Parameters.AddWithValue("@eventName", eventName);
+                cmd.Parameters.AddWithValue("@societyName", societyName);
+                cmd.Parameters.AddWithValue("@resourceName", resourceName);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void RefreshDataGridViewEvents(DataGridView dataGridView)
+        {
+            dataGridView.Rows.Clear();
+            LoadPendingResourceRequestsIntoGrid(dataGridView);
+        }
+
     }
 
     public class BudgetRequestData

@@ -142,6 +142,8 @@ namespace SocietyManagementSystem
 
         private void ManageEventsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ManageEvents manageEvents = new ManageEvents();
+            manageEvents.Show();
 
         }
 
