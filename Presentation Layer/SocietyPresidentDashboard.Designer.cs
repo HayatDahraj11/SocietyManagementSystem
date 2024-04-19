@@ -13,6 +13,11 @@
         private System.Windows.Forms.ColumnHeader columnHeaderEventDate;
         private System.Windows.Forms.Button buttonRemoveEvent; // Button for removing events
         private System.Windows.Forms.Button buttonAddEvent; // Button for adding events
+        private System.Windows.Forms.Button buttonRequestBudget; // Button for adding events
+        private ListView listViewBudgetRequests;
+        private ColumnHeader columnHeaderBudgetEventName;
+        private ColumnHeader columnHeaderBudgetStatus;
+        private ColumnHeader columnHeaderBudgetDescription;
 
         protected override void Dispose(bool disposing)
         {
@@ -35,6 +40,12 @@
             this.columnHeaderEventDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonRemoveEvent = new System.Windows.Forms.Button(); // Initialized button for removing events
             this.buttonAddEvent = new System.Windows.Forms.Button(); // Initialized button for adding events
+            this.buttonRequestBudget = new System.Windows.Forms.Button(); // Initialized button for requesting budget
+            this.listViewBudgetRequests = new System.Windows.Forms.ListView();
+            this.columnHeaderBudgetEventName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderBudgetStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderBudgetDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+
             // 
             // listViewMembers
             // 
@@ -48,6 +59,7 @@
             this.listViewMembers.TabIndex = 0;
             this.listViewMembers.UseCompatibleStateImageBehavior = false;
             this.listViewMembers.View = System.Windows.Forms.View.Details;
+       
             // 
             // columnHeaderName
             // 
@@ -117,6 +129,45 @@
             this.buttonAddEvent.Text = "Add Event";
             this.buttonAddEvent.UseVisualStyleBackColor = true;
             this.buttonAddEvent.Click += new System.EventHandler(this.buttonAddEvent_Click); // Add event handler for adding events
+            //
+            // buttonRequestBudget
+            //
+            this.buttonRequestBudget.Location = new System.Drawing.Point(636, 218); // Adjusted location
+            this.buttonRequestBudget.Size = new System.Drawing.Size(100, 23); // Adjusted size
+            this.buttonRequestBudget.TabIndex = 6; // Set tab index
+            this.buttonRequestBudget.Text = "Request Budget";
+            this.buttonRequestBudget.UseVisualStyleBackColor = true;
+            this.buttonRequestBudget.Click += new System.EventHandler(this.buttonRequestBudget_Click); // Add event handler for requesting budget
+            // 
+            // listViewBudgetRequests
+            // 
+            this.listViewBudgetRequests.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderBudgetEventName,
+            this.columnHeaderBudgetStatus,
+            this.columnHeaderBudgetDescription});
+            this.listViewBudgetRequests.FullRowSelect = true;
+            this.listViewBudgetRequests.Location = new System.Drawing.Point(12, 250);
+            this.listViewBudgetRequests.MultiSelect = false;
+            this.listViewBudgetRequests.Size = new System.Drawing.Size(650, 130); // Adjust size as needed
+            this.listViewBudgetRequests.TabIndex = 7; // Set tab index
+            this.listViewBudgetRequests.UseCompatibleStateImageBehavior = false;
+            this.listViewBudgetRequests.View = System.Windows.Forms.View.Details;
+            this.Controls.Add(this.listViewBudgetRequests); // Add the ListView to the form
+            //
+            // columnHeaderBudgetEventName
+            //
+            this.columnHeaderBudgetEventName.Text = "Event Name";
+            this.columnHeaderBudgetEventName.Width = 200;
+            //
+            // columnHeaderBudgetStatus
+            //
+            this.columnHeaderBudgetStatus.Text = "Status";
+            this.columnHeaderBudgetStatus.Width = 200;
+            //
+            // columnHeaderBudgetDescription
+            //
+            this.columnHeaderBudgetDescription.Text = "Description";
+            this.columnHeaderBudgetDescription.Width = 200;
             // 
             // SocietyPresidentDashboard
             // 
@@ -129,6 +180,8 @@
             this.Controls.Add(this.buttonRemoveMember);
             this.Controls.Add(this.buttonChangeRole);
             this.Controls.Add(this.listViewMembers);
+            this.Controls.Add(this.buttonRequestBudget);
+            this.Controls.Add(this.listViewBudgetRequests);
             this.Name = "SocietyPresidentDashboard";
             this.Text = "Society President Dashboard";
         }

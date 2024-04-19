@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Business Logic Layer\RequestBudgetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Business Logic Layer\ChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>

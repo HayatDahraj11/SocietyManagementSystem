@@ -66,6 +66,21 @@ CREATE TABLE event_registrations (
     FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
 
+CREATE TABLE resource_requests (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    society_id INT NOT NULL,
+    user_id INT NOT NULL, -- ID of the president making the request
+    description TEXT,
+    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    event_id INT, -- Nullable, if the request is event-specific
+    mentor_id INT, -- ID of the mentor who approved/rejected the request
+    FOREIGN KEY (society_id) REFERENCES societies(society_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id),
+    FOREIGN KEY (mentor_id) REFERENCES users(user_id)
+);
+
+
 -- Insert into society_roles
 INSERT INTO society_roles (role_name) VALUES
 ('president'),

@@ -13,6 +13,9 @@
     <Compile Update="Business Logic Layer\UserSocietiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Presentation Layer\RequestBudgetForm.Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Business Logic Layer\SocietyDetails.resx">

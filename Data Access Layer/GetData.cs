@@ -705,7 +705,74 @@ namespace SocietyManagementSystem.Data_Access_Layer
             return success;
         }
 
+        internal bool RequestBudget(int societyId, int userId, string description, int eventId)
+        {
+            bool success = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "INSERT INTO resource_requests (society_id, user_id, description, event_id) VALUES (@societyId, @userId, @"
+                        + "description, @eventId)";
+                    command.Parameters.AddWithValue("@societyId", societyId);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@description", description);
+                    command.Parameters.AddWithValue("@eventId", eventId);
+                    command.ExecuteNonQuery();
+                    success = true;
+                }
+                connection.Close();
+            }
+            return success;
+        }
+
+        public List<BudgetRequestData> GetBudgetRequestsForSociety(int societyId)
+        {
+            List<BudgetRequestData> budgetRequests = new List<BudgetRequestData>();
+            string query = "SELECT r.request_id, e.name AS event_name, r.status, r.description " +
+                           "FROM resource_requests r " +
+                           "INNER JOIN events e ON r.event_id = e.event_id " +
+                           "WHERE r.society_id = @societyId";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (MySqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = query;
+                    command.Parameters.AddWithValue("@societyId", societyId);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BudgetRequestData budgetRequest = new BudgetRequestData
+                            {
+                                RequestId = Convert.ToInt32(reader["request_id"]),
+                                EventName = reader["event_name"].ToString(),
+                                Status = reader["status"].ToString(),
+                                Description = reader["description"].ToString()
+                            };
+                            budgetRequests.Add(budgetRequest);
+                        }
+                    }
+                }
+            }
+            return budgetRequests;
+        }
+
     }
+
+    public class BudgetRequestData
+    {
+        public int RequestId { get; set; }
+        public string EventName { get; set; }
+        public string Status { get; set; }
+        public string Description { get; set; }
+    }
+
 
     public class SocitiesList
     {

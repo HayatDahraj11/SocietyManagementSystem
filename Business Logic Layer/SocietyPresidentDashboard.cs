@@ -13,6 +13,7 @@ namespace SocietyManagementSystem
             this.societyId = societyId;
             LoadMembers();
             LoadEvents();
+            LoadBudgetRequests();
         }
 
         private void LoadMembers()
@@ -100,6 +101,19 @@ namespace SocietyManagementSystem
             // Update the list view
             LoadEvents();
         }
+
+        private void buttonRequestBudget_Click(object sender, EventArgs e)
+        {
+            // Open a form to request a budget
+            if (listViewEvents.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewEvents.SelectedItems[0];
+                int selectedEventId = (int)selectedItem.Tag;
+                RequestBudgetForm requestBudgetForm = new RequestBudgetForm(societyId, SessionManager.GetInstance().GetUserId(), selectedEventId);
+                requestBudgetForm.ShowDialog();
+            }
+        }
+
         private void LoadEvents()
         {
             listViewEvents.Items.Clear();
@@ -123,6 +137,30 @@ namespace SocietyManagementSystem
                 MessageBox.Show("Failed to load events.");
             }
 
+        }
+
+        // Method to load and display budget requests
+        private void LoadBudgetRequests()
+        {
+            listViewBudgetRequests.Items.Clear();
+
+            // Use GetData method to retrieve budget requests
+            List<BudgetRequestData> budgetRequests = getData.GetBudgetRequestsForSociety(societyId);
+
+            if (budgetRequests != null)
+            {
+                foreach (var budgetRequest in budgetRequests)
+                {
+                    ListViewItem item = new ListViewItem(budgetRequest.EventName);
+                    item.SubItems.Add(budgetRequest.Status);
+                    item.SubItems.Add(budgetRequest.Description);
+                    listViewBudgetRequests.Items.Add(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to load budget requests.");
+            }
         }
 
 
