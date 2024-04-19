@@ -69,10 +69,11 @@ namespace SocietyManagementSystem
                     }
                     getData.RemoveMemberFromSociety(societyId, selectedMemberId);
 
-                    // Update the list view
-                    LoadMembers();
+
                 }
             }
+            // Update the list view
+            LoadMembers();
         }
         private void buttonRemoveEvent_Click(object sender, EventArgs e)
         {
@@ -87,6 +88,8 @@ namespace SocietyManagementSystem
                     getData.DeleteEvent(selectedEventId);
                 }
             }
+            // Update the list view
+            LoadEvents();
         }
 
         private void buttonAddEvent_Click(object sender, EventArgs e)
@@ -94,6 +97,8 @@ namespace SocietyManagementSystem
             // Open a form to add a new event
             AddEventForm addEventForm = new AddEventForm(societyId);
             addEventForm.ShowDialog();
+            // Update the list view
+            LoadEvents();
         }
         private void LoadEvents()
         {
@@ -117,6 +122,7 @@ namespace SocietyManagementSystem
             {
                 MessageBox.Show("Failed to load events.");
             }
+
         }
 
 

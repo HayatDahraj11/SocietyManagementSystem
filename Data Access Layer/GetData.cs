@@ -647,7 +647,7 @@ namespace SocietyManagementSystem.Data_Access_Layer
 
             return events;
         }
-        public bool AddEvent(string name, string description, DateTime eventDate, int societyId)
+        public bool AddEvent(string name, string description, DateTime eventDate, int societyId, string location)
         {
             bool success = false;
 
@@ -657,11 +657,12 @@ namespace SocietyManagementSystem.Data_Access_Layer
 
                 using (MySqlCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "INSERT INTO events (name, description, event_date, society_id) VALUES (@name, @description, @eventDate, @societyId)";
+                    command.CommandText = "INSERT INTO events (society_id, name, description, event_date, location) VALUES (@societyId, @name, @description, @eventDate, @location)";
                     command.Parameters.AddWithValue("@name", name);
                     command.Parameters.AddWithValue("@description", description);
                     command.Parameters.AddWithValue("@eventDate", eventDate);
                     command.Parameters.AddWithValue("@societyId", societyId);
+                    command.Parameters.AddWithValue("@location", location);
 
                     int rowsAffected = command.ExecuteNonQuery();
 
