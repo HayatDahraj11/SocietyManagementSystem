@@ -1,4 +1,5 @@
 using SocietyManagementSystem.Data_Access_Layer;
+using System.Text.RegularExpressions;
 
 namespace SocietyManagementSystem
 {
@@ -17,8 +18,50 @@ namespace SocietyManagementSystem
             string username = this.usernameTextBox.Text;
             string email = this.emailTextBox.Text;
             string password = this.passwordTextBox.Text; // Hash this password before storing
+            // check if combobox is selected
+            if (this.userTypeComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a user type.");
+                return;
+            }
             string userType = this.userTypeComboBox.SelectedItem.ToString();
-            DateTime joinDate = this.joinDatePicker.Value;
+
+
+
+            // Check if username already exists
+            if (getData.IfExistsUser(username, email))
+            {
+                MessageBox.Show("Username or Email already exists.");
+                return;
+            }
+
+            // Name must only contain alphabetic characters and spaces
+            if (!Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
+            {
+                MessageBox.Show("Name must only contain alphabetic characters and spaces.");
+                return;
+            }
+
+            // Username must not have spaces or symbols
+            if (!Regex.IsMatch(username, @"^[a-zA-Z0-9]+$"))
+            {
+                MessageBox.Show("Username must not have spaces or symbols.");
+                return;
+            }
+
+            // Email must be a university email
+            if (!email.EndsWith("@nu.edu.pk"))
+            {
+                MessageBox.Show("Email must be your university email i.e. ending with @nu.edu.pk");
+                return;
+            }
+
+            // Password must have at least 8 digits
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password must have at least 8 digits.");
+                return;
+            }
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || this.userTypeComboBox.SelectedIndex == -1)
             {
@@ -26,7 +69,7 @@ namespace SocietyManagementSystem
                 return;
             }
 
-            bool result = getData.RegisterUser(name, username, email, password, userType, joinDate);
+            bool result = getData.RegisterUser(name, username, email, password, userType);
 
             if (result)
             {
@@ -38,6 +81,8 @@ namespace SocietyManagementSystem
                 MessageBox.Show("Error registering user.");
             }
         }
+
+
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)
         {

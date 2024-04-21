@@ -433,9 +433,29 @@ namespace SocietyManagementSystem.Data_Access_Layer
             return success;
         }
 
-        public bool RegisterUser(string fullName, string username, string email, string password, string userType, DateTime joinDate)
+        public bool IfExistsUser(string username, string email)
+        {
+            bool exists = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                var query = "SELECT COUNT(*) FROM users WHERE username = @username OR email = @email";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    exists = Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+
+            return exists;
+        }
+
+        public bool RegisterUser(string fullName, string username, string email, string password, string userType)
         {
             bool success = false;
+            DateTime joinDate = DateTime.Now;
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
