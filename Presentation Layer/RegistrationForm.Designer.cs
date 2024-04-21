@@ -11,13 +11,11 @@ namespace SocietyManagementSystem
         private Label emailLabel;
         private Label passwordLabel;
         private Label userTypeLabel;
-        private Label joinDateLabel;
         private TextBox usernameTextBox;
         private TextBox nameTextBox;
         private TextBox emailTextBox;
         private TextBox passwordTextBox;
         private ComboBox userTypeComboBox;
-        private DateTimePicker joinDatePicker;
         private Button registerButton;
 
         private void InitializeComponent()
@@ -27,13 +25,11 @@ namespace SocietyManagementSystem
             emailLabel = new Label();
             passwordLabel = new Label();
             userTypeLabel = new Label();
-            joinDateLabel = new Label();
             nameTextBox = new TextBox();
             usernameTextBox = new TextBox();
             emailTextBox = new TextBox();
             passwordTextBox = new TextBox();
             userTypeComboBox = new ComboBox();
-            joinDatePicker = new DateTimePicker();
             registerButton = new Button();
             SuspendLayout();
             // 
@@ -81,15 +77,7 @@ namespace SocietyManagementSystem
             userTypeLabel.Size = new Size(60, 15);
             userTypeLabel.TabIndex = 8;
             userTypeLabel.Text = "User Type:";
-            // 
-            // joinDateLabel
-            // 
-            joinDateLabel.AutoSize = true;
-            joinDateLabel.Location = new Point(25, 260);
-            joinDateLabel.Name = "joinDateLabel";
-            joinDateLabel.Size = new Size(58, 15);
-            joinDateLabel.TabIndex = 10;
-            joinDateLabel.Text = "Join Date:";
+
             // 
             // nameTextBox
             // 
@@ -125,18 +113,12 @@ namespace SocietyManagementSystem
             // userTypeComboBox
             // 
             userTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            userTypeComboBox.Items.AddRange(new object[] { "student", "mentor", "other" });
+            userTypeComboBox.Items.AddRange(new object[] { "student", "mentor"});
             userTypeComboBox.Location = new Point(25, 230);
             userTypeComboBox.Name = "userTypeComboBox";
             userTypeComboBox.Size = new Size(300, 23);
             userTypeComboBox.TabIndex = 9;
-            // 
-            // joinDatePicker
-            // 
-            joinDatePicker.Location = new Point(25, 280);
-            joinDatePicker.Name = "joinDatePicker";
-            joinDatePicker.Size = new Size(300, 23);
-            joinDatePicker.TabIndex = 11;
+          
             // 
             // registerButton
             // 
@@ -160,8 +142,7 @@ namespace SocietyManagementSystem
             Controls.Add(passwordTextBox);
             Controls.Add(userTypeLabel);
             Controls.Add(userTypeComboBox);
-            Controls.Add(joinDateLabel);
-            Controls.Add(joinDatePicker);
+
             Controls.Add(registerButton);
             Name = "RegistrationForm";
             Text = "User Registration";

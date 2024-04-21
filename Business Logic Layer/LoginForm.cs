@@ -1,4 +1,5 @@
 using SocietyManagementSystem.Data_Access_Layer;
+using System.Text.RegularExpressions;
 
 namespace SocietyManagementSystem
 {
@@ -15,7 +16,24 @@ namespace SocietyManagementSystem
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            int loginSuccess = getData.LoginUser(usernameTextBox.Text, passwordTextBox.Text);
+            string username = usernameTextBox.Text;
+            string password = passwordTextBox.Text;
+
+            // Username must not have spaces or symbols
+            if (!Regex.IsMatch(username, @"^[a-zA-Z0-9]+$"))
+            {
+                MessageBox.Show("Username must not have spaces or symbols.");
+                return;
+            }
+
+            // Password must have at least 8 digits
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Password must have at least 8 digits.");
+                return;
+            }
+
+            int loginSuccess = getData.LoginUser(username, password);
 
             if (loginSuccess != -1)
             {
@@ -49,6 +67,7 @@ namespace SocietyManagementSystem
                 MessageBox.Show("Login failed. Please check your username and password.");
             }
         }
+
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
